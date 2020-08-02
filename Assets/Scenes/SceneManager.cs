@@ -4,13 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SceneManager : MonoBehaviour
-{
+{   
+    [Header("Main Cube")]
     public GameObject mainCube;
     GameObject g;
+    [Header("Buttons")]
     public Text btnText;
     public Text btnRotateText;
+    [Header("Materials")]
+    public Material selectedMaterial;
+    public Material unselectedMaterial;
     bool isAdd;
-    bool isRotateLeft = true;
+    public bool isRotateLeft = true;
+
+    public static SceneManager Instance { get; private set; } // static singleton
+
+    void Awake() {
+            if (Instance == null) { Instance = this;  }
+            else { Destroy(gameObject); }
+            // Cache references to all desired variables
+    }
 
     public void RotateCube(){
         if(isRotateLeft)
@@ -41,6 +54,7 @@ public class SceneManager : MonoBehaviour
 
     private void AddMainCube(){
         isAdd = true;
+        btnRotateText.transform.parent.gameObject.SetActive(true);
         btnText.text = "Remove";
         g = Instantiate(mainCube, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
         g.transform.Rotate(0,25f,0,Space.Self);
@@ -48,6 +62,7 @@ public class SceneManager : MonoBehaviour
 
     private void RemoveMainCube(){
         isAdd = false;
+        btnRotateText.transform.parent.gameObject.SetActive(false);
         btnText.text = "Add";
         Destroy(g);
     }

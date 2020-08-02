@@ -16,24 +16,31 @@ public class MultifunctionCube : MonoBehaviour
     // [Header("UI")]
     
  
-    // Start is called before the first frame update
-    void Start()
-    {
-      
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 
     void OnTriggerEnter(Collider other)
-    {   
-        Debug.Log("collide");
-        if (duplicate){
-            Transform g = Instantiate(other.gameObject.transform, new Vector3(2 * 2.0F, 0, 0), Quaternion.identity);
+    {  
+        bool isSelected = other.GetComponent<ObjectStatus>().isSelected;
+        bool isRotateLeft = SceneManager.Instance.isRotateLeft;
+
+        
+
+        if (isSelected){
+            if (duplicate){
+                if (isRotateLeft)
+                    Instantiate(other.gameObject.transform, new Vector3(2 * 2.0F, 0, 0), Quaternion.identity);
+            }
         }
+        if (fullSelect){
+                Debug.Log("full select");
+                other.GetComponent<ObjectStatus>().isSelected = !isRotateLeft;
+                if (isRotateLeft)
+                    other.GetComponent<Renderer>().material = SceneManager.Instance.unselectedMaterial;
+                else
+                     other.GetComponent<Renderer>().material = SceneManager.Instance.selectedMaterial;
+                   
+        }
+        
     }
 
 }
