@@ -7,15 +7,19 @@ public class SceneManager : MonoBehaviour
 {   
     [Header("Main Cube")]
     public GameObject mainCube;
-    GameObject g;
     [Header("Buttons")]
     public Text btnText;
     public Text btnRotateText;
     [Header("Materials")]
     public Material selectedMaterial;
     public Material unselectedMaterial;
-    bool isAdd;
+    [Header("Parameters")]
     public bool isRotateLeft = true;
+    public int duplicateCount = 1;
+    
+    bool isAdd;
+    GameObject g;
+    MultifunctionCube cubeFunctions;
 
     public static SceneManager Instance { get; private set; } // static singleton
 
@@ -36,12 +40,16 @@ public class SceneManager : MonoBehaviour
         btnRotateText.text = "Rotate Right";
         isRotateLeft = true;
         g.transform.Rotate(0,50f,0,Space.Self);
+        if(cubeFunctions.duplicate)
+            duplicateCount--;
     }
 
     private void RotateRight(){
         btnRotateText.text = "Rotate Left";
         isRotateLeft = false;
         g.transform.Rotate(0,-50f,0,Space.Self);
+        if(cubeFunctions.duplicate)
+            duplicateCount++;
     }
 
     public void AddRemoveMainCube(){
@@ -57,6 +65,7 @@ public class SceneManager : MonoBehaviour
         btnRotateText.transform.parent.gameObject.SetActive(true);
         btnText.text = "Remove";
         g = Instantiate(mainCube, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
+        cubeFunctions = g.GetComponent<MultifunctionCube>();
         g.transform.Rotate(0,25f,0,Space.Self);
     }
 

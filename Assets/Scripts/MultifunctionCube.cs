@@ -10,6 +10,7 @@ public class MultifunctionCube : MonoBehaviour
     public bool meshVertices;
     [Header("Handling")]
     public bool duplicate;
+    public bool delete;
     // [Header("Modify")]
     // [Header("Splines")]
     // [Header("Tags")]
@@ -27,8 +28,19 @@ public class MultifunctionCube : MonoBehaviour
 
         if (isSelected){
             if (duplicate){
+                int count = SceneManager.Instance.duplicateCount;
+                for (int i = 0; i < count; i++){
+                   Vector3 position = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
+                   Instantiate(other.gameObject.transform, position, Quaternion.identity); 
+                }
+            }
+            if (delete){
                 if (isRotateLeft)
-                    Instantiate(other.gameObject.transform, new Vector3(2 * 2.0F, 0, 0), Quaternion.identity);
+                    Destroy(other.gameObject);
+                else{
+                    Vector3 position = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
+                    Instantiate(other.gameObject.transform, position, Quaternion.identity);
+                }
             }
         }
         if (fullSelect){
