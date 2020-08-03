@@ -17,6 +17,7 @@ public class MultifunctionCube : MonoBehaviour
     [Header("Tags")]
     public bool tag;
     public bool showTag;
+    public bool tagOpacity;
     // [Header("UI")]
     
  
@@ -55,9 +56,16 @@ public class MultifunctionCube : MonoBehaviour
                 else
                     SceneManager.Instance.tagText.text = "Tags : ";
             }
+            if(tagOpacity){
+                 Color c = SceneManager.Instance.tagText.color;
+                if(isRotateLeft)
+                    c.a-=0.1f;
+                else
+                    c.a+=0.1f;
+                SceneManager.Instance.tagText.color = c;
+            }
         }
         if (fullSelect){
-                Debug.Log("full select");
                 other.GetComponent<ObjectStatus>().isSelected = !isRotateLeft;
                 if (isRotateLeft)
                     other.GetComponent<Renderer>().material = SceneManager.Instance.unselectedMaterial;
