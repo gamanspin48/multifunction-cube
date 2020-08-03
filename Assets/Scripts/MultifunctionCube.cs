@@ -18,7 +18,8 @@ public class MultifunctionCube : MonoBehaviour
     public bool tag;
     public bool showTag;
     public bool tagOpacity;
-    // [Header("UI")]
+    [Header("UI")]
+    public bool exportToFBX;
     
  
    
@@ -63,6 +64,9 @@ public class MultifunctionCube : MonoBehaviour
                 else
                     c.a+=0.1f;
                 SceneManager.Instance.tagText.color = c;
+            }
+            if(exportToFBX){
+                SceneManager.Instance.ExportToFBX(other.gameObject);
             }
         }
         if (fullSelect){

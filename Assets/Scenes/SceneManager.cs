@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using UnityFBXExporter;
 
 public class SceneManager : MonoBehaviour
 {   
@@ -18,6 +20,7 @@ public class SceneManager : MonoBehaviour
     public bool isRotateLeft = true;
     public int duplicateCount = 1;
     public string tag;
+    public string fileName;
   
     
     bool isAdd;
@@ -78,5 +81,18 @@ public class SceneManager : MonoBehaviour
         btnText.text = "Add";
         Destroy(g);
     }
+
+    public void ExportToFBX(GameObject objMeshToExport){
+        string path = Path.Combine(Application.persistentDataPath, "data");
+        path = Path.Combine(path, fileName+ ".fbx");
+
+        //Create Directory if it does not exist
+        if (!Directory.Exists(Path.GetDirectoryName(path)))
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+        }
+
+        FBXExporter.ExportGameObjToFBX(objMeshToExport, path, true, true);
+        }
 
 }
