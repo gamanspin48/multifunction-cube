@@ -11,9 +11,12 @@ public class MultifunctionCube : MonoBehaviour
     [Header("Handling")]
     public bool duplicate;
     public bool delete;
-    // [Header("Modify")]
+    [Header("Modify")]
+    public bool push;
     // [Header("Splines")]
-    // [Header("Tags")]
+    [Header("Tags")]
+    public bool tag;
+    public bool showTag;
     // [Header("UI")]
     
  
@@ -41,6 +44,12 @@ public class MultifunctionCube : MonoBehaviour
                     Vector3 position = new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f));
                     Instantiate(other.gameObject.transform, position, Quaternion.identity);
                 }
+            }
+            if(tag){
+                if(isRotateLeft)
+                    other.gameObject.tag = SceneManager.Instance.tag;
+                else 
+                    other.gameObject.tag = "Untagged";
             }
         }
         if (fullSelect){

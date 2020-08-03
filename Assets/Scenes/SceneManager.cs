@@ -16,6 +16,7 @@ public class SceneManager : MonoBehaviour
     [Header("Parameters")]
     public bool isRotateLeft = true;
     public int duplicateCount = 1;
+    public string tag;
     
     bool isAdd;
     GameObject g;
