@@ -27,8 +27,6 @@ public class MultifunctionCube : MonoBehaviour
         bool isSelected = other.GetComponent<ObjectStatus>().isSelected;
         bool isRotateLeft = SceneManager.Instance.isRotateLeft;
 
-        
-
         if (isSelected){
             if (duplicate){
                 int count = SceneManager.Instance.duplicateCount;
@@ -50,6 +48,12 @@ public class MultifunctionCube : MonoBehaviour
                     other.gameObject.tag = SceneManager.Instance.tag;
                 else 
                     other.gameObject.tag = "Untagged";
+            }
+            if(showTag){
+                if(isRotateLeft)
+                    SceneManager.Instance.tagText.text = "Tags : "+other.gameObject.tag;
+                else
+                    SceneManager.Instance.tagText.text = "Tags : ";
             }
         }
         if (fullSelect){

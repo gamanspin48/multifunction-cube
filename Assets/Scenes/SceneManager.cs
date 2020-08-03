@@ -7,9 +7,10 @@ public class SceneManager : MonoBehaviour
 {   
     [Header("Main Cube")]
     public GameObject mainCube;
-    [Header("Buttons")]
+    [Header("UI")]
     public Text btnText;
     public Text btnRotateText;
+    public Text tagText;
     [Header("Materials")]
     public Material selectedMaterial;
     public Material unselectedMaterial;
@@ -17,6 +18,7 @@ public class SceneManager : MonoBehaviour
     public bool isRotateLeft = true;
     public int duplicateCount = 1;
     public string tag;
+    public int tagOpacity = 0;
     
     bool isAdd;
     GameObject g;
