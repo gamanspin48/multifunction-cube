@@ -5,4 +5,5 @@ using UnityEngine;
 public class ObjectStatus : MonoBehaviour
 {
    public bool isSelected;
+   public GameObject prefab;
 }

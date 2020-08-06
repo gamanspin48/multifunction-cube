@@ -21,6 +21,7 @@ public class SceneManager : MonoBehaviour
     public int duplicateCount = 1;
     public string tag;
     public string fileName;
+    public GameObject prefab;
   
     
     bool isAdd;

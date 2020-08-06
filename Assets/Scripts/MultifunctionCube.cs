@@ -8,6 +8,7 @@ public class MultifunctionCube : MonoBehaviour
     public bool fullSelect;
     [Header("Convert")]
     public bool meshVertices;
+    public bool prefabInsert;
     [Header("Handling")]
     public bool duplicate;
     public bool delete;
@@ -67,6 +68,14 @@ public class MultifunctionCube : MonoBehaviour
             }
             if(exportToFBX){
                 SceneManager.Instance.ExportToFBX(other.gameObject);
+            }
+            if(prefabInsert){
+                if(isRotateLeft){
+                    Destroy(other.GetComponent<ObjectStatus>().prefab);
+                    other.GetComponent<ObjectStatus>().prefab = Instantiate(SceneManager.Instance.prefab, this.transform.position, Quaternion.identity);
+                }else
+                    other.GetComponent<ObjectStatus>().prefab = Instantiate(SceneManager.Instance.prefab, this.transform.position, Quaternion.identity);
+                
             }
         }
         if (fullSelect){
